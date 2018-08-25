@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const { GraphQLServer } = require('graphql-yoga')
+// L9-24 Creates graphql server (https://github.com/prisma/graphql-yoga)
+
+const { GraphQLServer } = require('graphql-yoga')       // Import graphql library
+
+// Graphql schema
 
 const typeDefs = `
     type Query {
         hello(name: String): String!
     }
 `
+
+// Resolvers
 
 const resolvers = {
     Query: {

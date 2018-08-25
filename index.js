@@ -1,12 +1,16 @@
-const { GraphQLServer } = require('graphql-yoga')
-const mongoose = require('mongoose');
+const { GraphQLServer } = require('graphql-yoga')           // Creates GraphQL server
+const mongoose = require('mongoose');                       // Connects to MongoDB locally (https://mongoosejs.com/docs/index.html)
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test');               // Database name is "test"
+
+// Database Model
 
 const Todo = mongoose.model('Todo', {
     text: String,
     complete: Boolean,
 });
+
+// Schemas
 
 const typeDefs = `
     type Query {
@@ -25,13 +29,15 @@ const typeDefs = `
     }
 `;
 
+// CRUD operations
+
 const resolvers = {
     Query: {
         hello: (_, { name }) => `Hello ${name || "World"}`,
         todos: () => Todo.find()
     },
     Mutation: {
-        createTodo: async (_, { text }) => {
+        createTodo: async (_, { text }) => {                        // Resolver functions
             const todo = new Todo({ text, complete: false });
             await todo.save();
             return todo;
@@ -46,6 +52,8 @@ const resolvers = {
         },
     }
 };
+
+// Completes the connection to MongoDB (callback)
 
 const server = new GraphQLServer({ typeDefs, resolvers })
 
