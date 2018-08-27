@@ -1,7 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')           // Creates GraphQL server
 const mongoose = require('mongoose');                       // Connects to MongoDB locally (https://mongoosejs.com/docs/index.html)
 
-mongoose.connect('mongodb://localhost/test');               // Database name is "test"
+mongoose.connect('mongodb://username1:username1@ds018558.mlab.com:18558/to-do-list-be');               // Database name is "test"
 
 // Database Model
 
